@@ -1,62 +1,127 @@
-# Robot Project
+# 🤖 Projeto de Testes de API com Robot Framework
 
-This project contains automated testing scripts and tools for robot testing and analysis.
+Este projeto contém testes automatizados para APIs REST utilizando o **Robot Framework** e a biblioteca **RequestsLibrary**. É ideal para validar endpoints de serviços web de forma simples e organizada.
 
-## Project Structure
+---
+
+## 📦 Estrutura do Projeto
 
 ```
-├── tests/          # Test scripts and configurations
-├── variables/      # Variable definitions and configurations
-└── results/        # Test results and output files
+robot-project/
+├── tests/
+│   └── api_tests.robot         # Arquivo principal com os casos de teste
+├── variables/
+│   └── config.robot            # Arquivo de variáveis globais (ex: URL da API)
+├── results/
+│   └── (gerado após execução)  # Relatórios HTML e logs da execução
+└── README.md                   # Este arquivo de instruções
 ```
 
-## Prerequisites
+---
 
-- Python 3.8 or higher
-- pip (Python package installer)
+## 🛠️ Requisitos
 
-## Installation
+- Python 3.7+
+- Pip (gerenciador de pacotes do Python)
+- Ambiente virtual (opcional, mas recomendado)
 
-1. Clone the repository:
+---
+
+## 📥 Instalação
+
+1. **Clone o repositório ou baixe os arquivos**
+
 ```bash
-git clone https://github.com/yourusername/Robot-Project.git
+git clone https://github.com/KamyllaJawad/Robot-Project.git
 cd Robot-Project
 ```
 
-2. Create a virtual environment (recommended):
+2. **(Opcional) Crie um ambiente virtual**
+
 ```bash
 python -m venv venv
+source venv/bin/activate      # Linux/Mac
+venv\Scripts\activate         # Windows
 ```
 
-3. Activate the virtual environment:
-- Windows:
+3. **Instale as dependências**
+
 ```bash
-venv\Scripts\activate
+pip install robotframework
+pip install robotframework-requests
 ```
-- Linux/MacOS:
+
+---
+
+## ▶️ Como Executar os Testes
+
+1. Certifique-se de estar na pasta raiz do projeto:
+
 ```bash
-source venv/bin/activate
+cd Project-Robot
 ```
 
-4. Install dependencies:
+2. Execute os testes com o comando abaixo:
+
 ```bash
-pip install -r requirements.txt
+robot -d results tests/api_tests.robot
 ```
 
-## Usage
+3. Após a execução, abra o arquivo de relatório:
 
-1. Navigate to the project directory
-2. Run your tests using the appropriate test scripts in the `tests/` directory
-3. Results will be saved in the `results/` directory
+```bash
+results/report.html
+```
 
-## Contributing
+> Ou abra manualmente com seu navegador: `./results/report.html`
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+---
 
-## License
+## 📁 Explicação das Pastas e Arquivos
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+### `tests/api_tests.robot`
+
+Contém os **casos de teste de API** usando a biblioteca `RequestsLibrary`. Exemplo:
+
+- `GET /comments?postId=1` → Verifica se os comentários de um post específico são retornados.
+- Verificações incluem: status 200, presença de campos `id`, `name`, `email`, `body`.
+
+### `variables/config.robot`
+
+Arquivo de **variáveis globais** reutilizáveis em todos os testes. Exemplo:
+
+```robot
+*** Variables ***
+${BASE_URL}    https://jsonplaceholder.typicode.com
+```
+
+Isso permite trocar facilmente o endereço da API sem modificar os testes.
+
+### `results/`
+
+Pasta onde são armazenados os **relatórios de execução** após rodar os testes:
+
+- `log.html`: detalhes passo a passo.
+- `report.html`: visão geral dos testes.
+- `output.xml`: saída bruta em XML.
+
+---
+
+## 🧪 Exemplo de Saída
+
+Após rodar os testes com sucesso, o terminal mostrará:
+
+```
+Output:  results/output.xml
+Log:     results/log.html
+Report:  results/report.html
+```
+
+Abra `report.html` em seu navegador para ver os resultados de forma amigável.
+
+---
+
+## 📌 Observações
+
+- Este projeto utiliza a API pública `jsonplaceholder.typicode.com` apenas para fins educacionais.
+- Pode ser expandido para testar APIs reais, adicionando headers, autenticação, etc.
